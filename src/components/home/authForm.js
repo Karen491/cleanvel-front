@@ -14,8 +14,7 @@ const AuthForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(login(credentials)).then(() => {
-        });
+        dispatch(login(credentials));
     };
 
     return (

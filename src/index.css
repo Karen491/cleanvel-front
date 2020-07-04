@@ -26,8 +26,16 @@ code {
   justify-content: center;
 }
 
-.home {
-  text-align: center;
+.nav-name-text {
+  color: rgb(8, 63, 33);
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.nav-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
 }
 
 
