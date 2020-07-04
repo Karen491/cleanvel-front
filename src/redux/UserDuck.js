@@ -3,9 +3,9 @@ axios.defaults.withCredentials = true;
 
 //Action types
 const LOADING = "cleanvel/user/LOADING";
-const LOGIN_SUCESS = "cleanvel/user/LOGIN_SUCESS";
+const LOGIN_SUCCESS = "cleanvel/user/LOGIN_SUCCESS";
 const LOGIN_ERROR = "cleanvel/user/LOGIN_ERROR";
-const LOGOUT = "cleanvel/user/LOGOUT";
+const LOGOUT_SUCCESS = "cleanvel/user/LOGOUT_SUCCESS";
 
 const initialState = {
     data: JSON.parse(localStorage.getItem("user")),
@@ -19,11 +19,11 @@ export default function reducer(state = initialState, action) {
     switch (action.type) {
         case LOADING:
             return { ...state, status: "pending" };
-        case LOGIN_SUCESS:
+        case LOGIN_SUCCESS:
             return { status: "success", data: { ...action.payload } };
         case LOGIN_ERROR:
             return { status: "error", error: action.error };
-        case LOGOUT:
+        case LOGOUT_SUCCESS:
             return initialState;
         default:
             return state;
@@ -37,17 +37,17 @@ export const loadingUser = () => ({
 });
 
 export const loginSuccess = (payload) => ({
-    type: LOGIN_SUCESS, 
+    type: LOGIN_SUCCESS,
     payload,
 });
 
 export const loginError = (error) => ({
-    type: LOGIN_ERROR, 
+    type: LOGIN_ERROR,
     error,
 });
 
-export const logout = () => ({
-    type: LOGOUT,
+export const logoutSuccess = () => ({
+    type: LOGOUT_SUCCESS,
 });
 
 
@@ -55,12 +55,22 @@ export const logout = () => ({
 export const login = (credentials) => (dispatch) => {
     dispatch(loadingUser());
     return axios
-    .post("http://localhost:3000/login", credentials)
-    .then((res) => {
-        const user = res.data.user;
-        localStorage.setItem("user", JSON.stringify(user));
-        dispatch(loginSuccess(user));
-    })
-    .catch((res) => dispatch(loginError(res.response.data)));
+        .post("http://localhost:3000/login", credentials)
+        .then((res) => {
+            const user = res.data.user;
+            localStorage.setItem("user", JSON.stringify(user));
+            dispatch(loginSuccess(user));
+        })
+        .catch((res) => dispatch(loginError(res.response.data)));
+};
+
+//logout thunk
+export const logout = () => (dispatch) => {
+    return axios
+        .post("http://localhost:3000/logout")
+        .then(() => {
+            localStorage.removeItem("user");
+            dispatch(logoutSuccess());
+        });
 };
 
