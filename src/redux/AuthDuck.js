@@ -1,4 +1,5 @@
 import axios from "axios";
+import { base_url } from "./variables";
 axios.defaults.withCredentials = true;
 
 //Action types
@@ -55,7 +56,7 @@ export const logoutSuccess = () => ({
 export const login = (credentials) => (dispatch) => {
     dispatch(loadingUser());
     return axios
-        .post("http://localhost:3000/login", credentials)
+        .post(`${base_url}/login`, credentials)
         .then((res) => {
             const user = res.data.user;
             localStorage.setItem("user", JSON.stringify(user));
@@ -67,7 +68,7 @@ export const login = (credentials) => (dispatch) => {
 //logout thunk
 export const logout = () => (dispatch) => {
     return axios
-        .post("http://localhost:3000/logout")
+        .post(`${base_url}/logout`)
         .then(() => {
             localStorage.removeItem("user");
             dispatch(logoutSuccess());
