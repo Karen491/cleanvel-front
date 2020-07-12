@@ -12,14 +12,19 @@ code {
     monospace;
 }
 
-.authform {
-  font-size: 40px;
-  margin-top: auto;
-  text-align: center;
+.authform-background {
+  padding-right: 80px;
+  padding-left: 80px;
   background-image: url(/images/7327649.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+}
+
+.authform {
+  font-size: 20px;
+  text-align: center;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -27,9 +32,9 @@ code {
 }
 
 .nav-name-text {
-  color: rgb(8, 63, 33);
-  font-size: 17px;
-  font-weight: 400;
+  color: rgb(17, 107, 9);
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .nav-image {
@@ -37,5 +42,24 @@ code {
   height: 60px;
   border-radius: 50%;
 }
+
+.profile-card {
+  border: 1px solid rgb(111, 122, 110);
+  border-radius: 10%;
+  width: 300px;
+  height: 300px;
+  align-items: center;
+}
+
+.body-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+
+
 
 
