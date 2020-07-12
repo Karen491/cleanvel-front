@@ -1,4 +1,5 @@
 import React from "react";
+import UIkit from "uikit";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { createUser } from "../../redux/UsersDuck";
@@ -17,7 +18,9 @@ const NewUser = () => {
                 formData.append(key, data[key]);
             }
         };
-        dispatch(createUser(formData));
+        dispatch(createUser(formData)).then(() => {
+            UIkit.modal("#new-user").hide();
+        });
     };
 
 
@@ -34,7 +37,7 @@ const NewUser = () => {
                     </div>
 
                     <div className="uk-modal-body">
-                        <UserForm register={register} errors={errors}/>
+                        <UserForm register={register} errors={errors} />
                     </div>
                     <div className="uk-modal-footer uk-text-right">
                         <button className="uk-button" type="button" onClick={handleSubmit(onSubmit)}>Guardar</button>

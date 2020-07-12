@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUsers, deleteUser } from "../../redux/UsersDuck";
+import { getUsers } from "../../redux/UsersDuck";
 import { denormalizeData } from "../../utils/formatters";
 import TableCard from "./TableCard";
 import EditUser from "./EditUser";

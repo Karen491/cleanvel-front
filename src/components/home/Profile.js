@@ -29,7 +29,6 @@ const Profile = () => {
                 <Title className="uk-card-title uk-margin-remove">{user.name} {user.last_name}</Title>
                 <p className="uk-margin-remove">Usuario: {user.username}</p>
                 <p className="uk-margin-remove">Activo desde {dayjs(user.createdAt).locale("es").format("MMMM YYYY")}</p>
-                <button className="uk-margin-top uk-button">Editar</button>
             </ProfileBody>
         </ProfileCard>
     )
