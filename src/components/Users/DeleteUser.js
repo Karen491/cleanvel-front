@@ -17,7 +17,7 @@ const DeleteUser = ({ _id }) => {
 
     return (
         <div>
-            <a uk-toggle="target: #delete-warning" href="/usuarios" className="uk-icon-button" uk-icon="trash" type="button" onClick={handleClick}></a>
+            <button uk-toggle="target: #delete-warning" href="/usuarios" className="uk-icon-button" uk-icon="trash" type="button" onClick={handleClick}></button>
 
             <div id="delete-warning" uk-modal="true">
                 {editableUser ?

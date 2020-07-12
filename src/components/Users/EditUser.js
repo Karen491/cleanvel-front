@@ -1,38 +1,58 @@
 import React from "react";
+import UIkit from "uikit";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { searchUser } from "../../redux/UsersDuck";
+import { searchUser, editUser } from "../../redux/UsersDuck";
 import EditForm from "../Common/EditForm";
+import styled from "styled-components";
+
+const Title = styled.h3`
+color: rgb(17, 107, 9);
+font-weight: 500;
+`
+
+const Img = styled.img`
+border: 1px solid rgb(17, 107, 9);
+border-radius: 5%;
+`
+
 
 const EditUser = ({ _id }) => {
     const dispatch = useDispatch();
     const editableUser = useSelector(state => state.users.editableUser);
+    const { register, handleSubmit, errors, reset } = useForm();
 
     const handleClick = () => {
         dispatch(searchUser(_id));
     };
 
+    const onSubmit = (data) => {
+        const id = editableUser._id;
+        const params = { id, data }
+        dispatch(editUser(params)).then(() => {
+            UIkit.modal("#edit-warning").hide();
+        })
+    };
+
     return (
         <div>
-            <a uk-toggle="target: #edit-warning" href="/usuarios" className="uk-icon-button" uk-icon="file-edit" type="button" onClick={handleClick}></a>
+            <button uk-toggle="target: #edit-warning" href="/usuarios" className="uk-icon-button" uk-icon="file-edit" type="button" onClick={handleClick}></button>
 
             <div id="edit-warning" uk-modal="true">
-                {editableUser ?
+                {editableUser &&
                     <div className="uk-modal-dialog uk-modal-body">
-                        <h4><span uk-icon="icon: warning; ratio: 3"></span>
-                            {editableUser.name} {editableUser.last_name}
-                        </h4>
-                        <div>
-                            <button className="uk-button uk-button-default" type="button" uk-toggle="target: #toggle-usage">Editar</button>
-                            <div id="toggle-usage" hidden>
-                                <EditForm data={editableUser} _id={_id}/>
-                            </div>
+                        <Title className="uk-align-center">{editableUser.name} {editableUser.last_name}</Title>
+                        <div className="uk-flex">
+                            <Img className="uk-align-center uk-margin-right" width="120" height="90" src={editableUser.profile_picture ? editableUser.profile_picture : "/images/cleanvel-logo-letter.png"} alt={editableUser.name} />
+                            <EditForm data={editableUser} register={register} errors={errors} reset={reset}/>
                         </div>
                         <hr></hr>
                         <p className="uk-text-right">
                             <button className="button-nb uk-modal-close" type="button">Cancelar</button>
+                            <button className="button" type="button" onClick={handleSubmit(onSubmit)}>Guardar</button>
                         </p>
                     </div>
-                    : null}
+                }
             </div>
         </div>
     )

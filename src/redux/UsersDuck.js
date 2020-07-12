@@ -147,10 +147,11 @@ export const createUser = (data) => (dispatch) => {
 };
 
 //Edit user thunk
-export const editUser = (id, data) => (dispatch) => {
+export const editUser = (params) => (dispatch) => {
     dispatch(loadingUsers());
+    console.log("Params:", params.id);
     return axios
-        .patch(`${base_url}/users/${id}`, data, { headers: { "Content-Type": "multipart/form-data" } })
+        .patch(`${base_url}/users/${params.id}`, params.data)
         .then((res) => {
             dispatch(editUserSuccess(res.data.user));
         })
