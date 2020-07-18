@@ -1,12 +1,18 @@
 import React from 'react';
-import './App.css';
-import Home from './components/Home/HomeRoute';
+import { useSelector } from "react-redux";
+//import Home from './components/Home/HomeRoute';
+import AuthForm from "./components/Home/AuthForm";
+import Navbar from "./components/Home/Navbar";
 import Routes from './Routes';
+import './App.css';
 
 function App() {
+  const user = useSelector(state => state.user.data);
+
   return (
-    <div>
-      <Home />
+    <div className="uk-width-expand uk-margin-remove" uk-grid="true">
+      {!user && <AuthForm />}
+      {user && <Navbar user={user} />}
       <Routes />
     </div>
   );

@@ -7,7 +7,7 @@ const Home = () => {
     const user = useSelector(state => state.user.data);
 
     return (
-        <div className="home">
+        <div className="uk-padding-remove">
             {!user && <AuthForm />}
             {user && <Navbar user={user} />}
         </div>

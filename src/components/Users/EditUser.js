@@ -3,19 +3,7 @@ import UIkit from "uikit";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { searchUser, editUser } from "../../redux/UsersDuck";
-import EditForm from "../Common/EditForm";
-import styled from "styled-components";
-
-const Title = styled.h3`
-color: rgb(17, 107, 9);
-font-weight: 500;
-`
-
-const Img = styled.img`
-border: 1px solid rgb(17, 107, 9);
-border-radius: 5%;
-`
-
+import UserForm from "../Forms/UserForm";
 
 const EditUser = ({ _id }) => {
     const dispatch = useDispatch();
@@ -30,27 +18,31 @@ const EditUser = ({ _id }) => {
         const id = editableUser._id;
         const params = { id, data }
         dispatch(editUser(params)).then(() => {
-            UIkit.modal("#edit-warning").hide();
+            UIkit.modal("#edit-user").hide();
         })
     };
 
     return (
         <div>
-            <button uk-toggle="target: #edit-warning" href="/usuarios" className="uk-icon-button" uk-icon="file-edit" type="button" onClick={handleClick}></button>
+            <button uk-toggle="target: #edit-user" className="uk-icon-button uk-margin-small-right" uk-icon="file-edit" type="button" onClick={handleClick}></button>
 
-            <div id="edit-warning" uk-modal="true">
+            <div id="edit-user" uk-modal="true">
                 {editableUser &&
-                    <div className="uk-modal-dialog uk-modal-body">
-                        <Title className="uk-align-center">{editableUser.name} {editableUser.last_name}</Title>
-                        <div className="uk-flex">
-                            <Img className="uk-align-center uk-margin-right" width="120" height="90" src={editableUser.profile_picture ? editableUser.profile_picture : "/images/cleanvel-logo-letter.png"} alt={editableUser.name} />
-                            <EditForm data={editableUser} register={register} errors={errors} reset={reset}/>
+                    <div className="uk-modal-dialog">
+                        <button className="uk-modal-close-default" type="button" uk-close="true"></button>
+
+                        <div className="uk-modal-header uk-flex">
+                            <img className="uk-border-circle uk-margin-right " width="80" height="80" src={editableUser.profile_picture ? editableUser.profile_picture : "/images/cleanvel-logo-letter.png"} alt={editableUser.name} />
+                            <h2 className="uk-modal-title title">{editableUser.name} {editableUser.last_name}</h2>
                         </div>
-                        <hr></hr>
-                        <p className="uk-text-right">
-                            <button className="button-nb uk-modal-close" type="button">Cancelar</button>
-                            <button className="button" type="button" onClick={handleSubmit(onSubmit)}>Guardar</button>
-                        </p>
+
+                        <div className="uk-modal-body">
+                            <UserForm data={editableUser} errors={errors} register={register} reset={reset}/>
+                        </div>
+
+                        <div className="uk-modal-footer uk-text-right">
+                            <button className="form-button" onClick={handleSubmit(onSubmit)}>Guardar</button>
+                        </div>
                     </div>
                 }
             </div>
