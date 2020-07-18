@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector } from "react-redux";
-//import Home from './components/Home/HomeRoute';
 import AuthForm from "./components/Home/AuthForm";
 import Navbar from "./components/Home/Navbar";
-import Routes from './Routes';
+import Routes from "./Routes";
 import './App.css';
 
 function App() {
