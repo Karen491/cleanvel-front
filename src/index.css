@@ -52,6 +52,61 @@ font-weight: 400;
   background-color: #a0b8b6;
 }
 
+.route-title {
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+color: #17252A;
+font-weight: 600;
+}
+
+.table-head {
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+position: sticky;
+top: 0; 
+background-color: #174758;
+color: #FEFFFF;
+text-transform: capitalize;
+font-size: 15px;
+}
+
+.table-head-sub {
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+position: sticky;
+top: 0; 
+background-color: #c1d6d5;
+color: #17252A;
+text-transform: capitalize;
+font-size: 14px;
+border-top: 1px solid white;
+border-right: 1px solid #17252A;
+text-align: center;
+}
+
+
+.table-cell {
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+color: rgb(82, 82, 82);
+font-size: 12px;
+}
+
+.test {
+  background-color: lightcoral;
+}
+
+.test2 {
+  background-color: lightgreen;
+}
+
+.test-font {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 17px;
+}
+
+
+/* Form styles */
+.error {
+color:red;
+font-size: 15px;
+}
 
 
 

@@ -18,15 +18,15 @@ const EditUser = ({ _id }) => {
         const id = editableUser._id;
         const params = { id, data }
         dispatch(editUser(params)).then(() => {
-            UIkit.modal("#edit-user").hide();
+            UIkit.modal(`#edit-user-${id}`).hide();
         })
     };
 
     return (
         <div>
-            <button uk-toggle="target: #edit-user" className="uk-icon-button uk-margin-small-right" uk-icon="file-edit" type="button" onClick={handleClick}></button>
+            <button uk-toggle={`target: #edit-user-${_id}`} className="uk-icon-button uk-margin-small-right" uk-icon="file-edit" type="button" onClick={handleClick}></button>
 
-            <div id="edit-user" uk-modal="true">
+            <div id={`edit-user-${_id}`} uk-modal="true">
                 {editableUser &&
                     <div className="uk-modal-dialog">
                         <button className="uk-modal-close-default" type="button" uk-close="true"></button>
@@ -37,7 +37,7 @@ const EditUser = ({ _id }) => {
                         </div>
 
                         <div className="uk-modal-body">
-                            <UserForm data={editableUser} errors={errors} register={register} reset={reset}/>
+                            <UserForm data={editableUser} errors={errors} register={register} reset={reset} />
                         </div>
 
                         <div className="uk-modal-footer uk-text-right">

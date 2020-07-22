@@ -43,19 +43,19 @@ const ProductForm = ({ register, errors, data, reset }) => {
                     ref={register({ required: true })}
                 >
                     <option value="">Selecciona la categoría...</option>
-                    <option>Desechables</option>
-                    <option>General</option>
-                    <option>Jarciería</option>
-                    <option>Otros</option>
-                    <option>Papel</option>
-                    <option>Químico</option>
-                    <option>Varios</option>
+                    <option selected={data ? (data.category === "Desechables" ? "Selected" : "") : null}>Desechables</option>
+                    <option selected={data ? (data.category === "General" ? "Selected" : "") : null}>General</option>
+                    <option selected={data ? (data.category === "Jarciería" ? "Selected" : "") : null}>Jarciería</option>
+                    <option selected={data ? (data.category === "Otros" ? "Selected" : "") : null}>Otros</option>
+                    <option selected={data ? (data.category === "Papel" ? "Selected" : "") : null}>Papel</option>
+                    <option selected={data ? (data.category === "Químico" ? "Selected" : "") : null}>Químico</option>
+                    <option selected={data ? (data.category === "Varios" ? "Selected" : "") : null}>Varios</option>
                 </select>
                 {errors.category && <Error>Seleccionar la categoría</Error>}
             </div>
 
             <div className="uk-width-1-2@s">
-                <label className="uk-form-label">Disponibilidad: {data ? <Select>{data.availability}</Select> : null}</label>
+                <label className="uk-form-label">Disponibilidad:</label>
                 <select
                     defaultValue={data ? data.availability : ""}
                     className="uk-select"
@@ -63,9 +63,9 @@ const ProductForm = ({ register, errors, data, reset }) => {
                     ref={register({ required: true })}
                 >
                     <option value="">Selecciona la disponibilidad...</option>
-                    <option>Ciudad Judicial</option>
-                    <option>Libertad</option>
-                    <option>Todas las tiendas</option>
+                    <option value="ciudad_judicial" selected={data ? (data.availability === "ciudad_judicial" ? "Selected" : "") : null}>Ciudad Judicial</option>
+                    <option value="libertad" selected={data ? (data.availability === "libertad" ? "Selected" : "") : null}>Libertad</option>
+                    <option value="all" selected={data ? (data.availability === "all" ? "Selected" : "") : null}>Todas las tiendas</option>
                 </select>
                 {errors.availability && <Error>Seleccionar la disponibilidad</Error>}
             </div>
