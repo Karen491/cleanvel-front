@@ -19,18 +19,19 @@ const EditProduct = ({ id }) => {
             data.purchase_price = (editableProduct.purchase_price + parseFloat(data.purchase_price)) / 2;
         }
         const id = editableProduct._id;
-        const params = { id, data }
+        const quantity = editableProduct.quantity;
+        const params = { id, data: { ...data, quantity } }
         dispatch(editProduct(params)).then(() => {
-            UIkit.modal("#edit-product").hide();
+            UIkit.modal(`#edit-product-${id}`).hide();
         });
     };
 
 
     return (
         <div>
-            <button className="uk-icon-button uk-margin-small-right" uk-icon="file-edit" type="button" uk-toggle="target: #edit-product" onClick={handleClick}></button>
+            <button className="uk-icon-button uk-margin-small-right" uk-icon="file-edit" type="button" uk-toggle={`target: #edit-product-${id}`} onClick={handleClick}></button>
 
-            <div id="edit-product" uk-modal="true">
+            <div id={`edit-product-${id}`} uk-modal="true">
                 {editableProduct &&
                     <div className="uk-modal-dialog">
                         <button className="uk-modal-close-default" type="button" uk-close="true"></button>
@@ -38,7 +39,7 @@ const EditProduct = ({ id }) => {
                             <h2 className="uk-modal-title title">{editableProduct.name}</h2>
                         </div>
                         <div className="uk-modal-body">
-                            <ProductForm data={editableProduct} register={register} errors={errors} reset={reset}/>
+                            <ProductForm data={editableProduct} register={register} errors={errors} reset={reset} />
                         </div>
                         <div className="uk-modal-footer uk-text-right">
                             <button className="form-button" onClick={handleSubmit(onSubmit)}>Guardar</button>

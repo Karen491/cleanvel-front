@@ -1,118 +1,89 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getProducts } from "../../redux/ProductsDuck";
-import { denormalizeData } from "../../utils/formatters";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { denormalizeData, currencyFormat } from "../../utils/formatters";
+import RouteTitle from "../Common/RouteTitle";
 import styled from 'styled-components'
-import InventoryTable from "./InventoryTable";
 
-const Styles = styled.div`
-  padding: 1rem;
-
-  table {
-    border-spacing: 0;
-    border: 1px solid black;
-    background-color: white;
-
-    tr {
-      :last-child {
-        td {border-bottom: 0;}
-      }
-    }
-
-    th, td {
-      margin: 0;
-      padding: 0.5rem;
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
-
-      :last-child {
-        border-right: 0;
-      }
-    }
-  }
-  .pagination {
-    padding: 0.5rem;
-  }
+const Card = styled.div`
+border: 1px solid gray;
+color: #FEFFFF;
+background-color: #25424dd0;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+font-size: 17px;
 `
 
 const Inventory = () => {
-    const dispatch = useDispatch();
     const products = useSelector(state => state.products.products);
 
-    useEffect(() => {
-        dispatch(getProducts());
-    }, [dispatch]);
-
-    const columns = React.useMemo(() => [
-        {
-            Header: 'Datos del producto',
-            columns: [
-                {
-                    Header: 'Nombre',
-                    accessor: 'name',
-                },
-                {
-                    Header: 'Disponibilidad',
-                    accessor: 'availability',
-                },
-                {
-                    Header: 'Margen mínimo',
-                    accessor: 'minumum',
-                },
-                {
-                    Header: 'Precio de compra',
-                    accessor: 'purchase_price',
-                },
-                {
-                    Header: 'Precio de venta',
-                    accessor: 'sale_price',
-                },
-                {
-                    Header: 'Margen de ganancia',
-                    accessor: 'profit',
-                },
-            ]
-        },
-        {
-            Header: 'Cantidad',
-            columns: [
-                {
-                    Header: 'Almacen',
-                    accessor: 'quantity.warehouse',
-                },
-                {
-                    Header: 'Libertad',
-                    accessor: 'quantity.libertad',
-                },
-                {
-                    Header: 'Ciudad Judicial',
-                    accessor: 'quantity.ciudad_judicial',
-                },
-            ]
-
-        },
-        {
-            Header: 'TOTALES', 
-            columns: [
-                {
-                    Header: 'Cantidad total',
-                    accessor: 'totals.total_quantity',
-                },
-                {
-                    Header: 'Valor de inventario',
-                    accessor: 'totals.inventory_value',
-                },
-            ]
-        }
-
-    ], []);
-
     return (
-        <div>
-            <h1>Inventario</h1>
-            <Styles>
-                <InventoryTable columns={columns} data={denormalizeData(products)} />
-            </Styles>
+        <div className="uk-margin-left uk-width-expand">
+            <div className="uk-flex uk-flex-between uk-margin-large-left uk-padding-remove-bottom">
+                <RouteTitle title="Inventario Cleanvel" img="https://res.cloudinary.com/karen491/image/upload/c_scale,h_351,w_424/v1595050577/cleanvel/App%20pictures/inventory_tivarg.png"/>
+
+                <div className="uk-inline uk-margin-top uk-margin-large-right">
+                    <button className="app-button" type="button">
+                        <span className="uk-margin-small-right" uk-icon="icon: cog"></span>
+                        Herramientas
+                    </button>
+
+                    <div className="profile-card" uk-dropdown="pos: bottom-left">
+                        <ul className="uk-nav uk-dropdown-nav">
+                            <li><Link to="/inventario/compra"><span className="nav-text">Agregar a stock</span></Link></li>
+                            <li className="uk-margin-top"><Link to="/inventario/traspaso"><span className="nav-text">Traspaso</span></Link></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr className="uk-margin-remove-top divider"></hr>
+
+
+            <div className="uk-child-width-expand@s uk-text-center uk-margin-top uk-margin-left uk-margin-right" uk-grid="true">
+                <div>
+                    <Card className="uk-card uk-card-small uk-card-default uk-card-body test-font">
+                        Total:
+                        <p>{currencyFormat(
+                        denormalizeData(products).reduce((acc, product) => {
+                            return acc + product.totals.inventory_value;
+                        }, 0))}
+                        </p>
+                    </Card>
+                </div>
+
+                <div>
+                    <Card className="uk-card uk-card-small uk-card-default uk-card-body">
+                        Almacén:
+                        <p>{currencyFormat(
+                        denormalizeData(products).reduce((acc, product) => {
+                            return acc + product.inventory_value.warehouse;
+                        }, 0))}
+                        </p>
+                    </Card>
+                </div>
+
+
+                <div>
+                    <Card className="uk-card uk-card-small uk-card-default uk-card-body">
+                        Libertad:
+                        <p>{currencyFormat(
+                        denormalizeData(products).reduce((acc, product) => {
+                            return acc + product.inventory_value.libertad;
+                        }, 0))}
+                        </p>
+                    </Card>
+                </div>
+
+                <div className="">
+                    <Card className="uk-card uk-card-small uk-card-body">
+                        Ciudad Judicial:
+                        <p>{currencyFormat(
+                        denormalizeData(products).reduce((acc, product) => {
+                            return acc + product.inventory_value.ciudad_judicial;
+                        }, 0))}
+                        </p>
+                    </Card>
+                </div>
+            </div>
         </div>
     )
 }

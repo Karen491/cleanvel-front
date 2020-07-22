@@ -50,6 +50,13 @@ const Navbar = () => {
                     </li>
 
                     <li>
+                        <Link to="/ventas">
+                            <span className="uk-margin-small-right nav-text" uk-icon="icon: tag; ratio: 1.1"></span>
+                            <span className="nav-text">Ventas</span>
+                        </Link>
+                    </li>
+
+                    <li>
                         <Link className="uk-text-capitalize" to="/usuarios">
                             <span className="uk-margin-small-right nav-text" uk-icon="icon: users; ratio: 1.1"></span>
                             <span className="nav-text">Usuarios</span>

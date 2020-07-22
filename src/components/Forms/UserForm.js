@@ -83,8 +83,8 @@ const UserForm = ({ data, errors, register, reset }) => {
                     ref={register}
                 >
                     <option value="">Selecciona el permiso...</option>
-                    <option>Usuario</option>
-                    <option>Administrador</option>
+                    <option selected={data ? (data.role === "Usuario" ? "Selected" : "") : null}>Usuario</option>
+                    <option selected={data ? (data.role === "Administrador" ? "Selected" : "") : null}>Administrador</option>
                 </select>
                 {errors.role && <Error>Especificar permisos</Error>}
             </div>

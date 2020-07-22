@@ -19,16 +19,10 @@ const NewProduct = () => {
 
     return (
         <div className="uk-margin-top uk-margin-medium-right">
-            <button uk-toggle="target: #new-user" type="button" className="uk-align-center uk-margin-remove-top app-button">
+            <button uk-toggle="target: #new-product" type="button" className="uk-align-center uk-margin-remove-top app-button">
                 <span uk-icon="icon: plus" className="uk-margin-small-right"></span>
                     Agregar nuevo producto
             </button>
-{/* 
-            <button className="product-button" type="button" uk-toggle="target: #new-product">
-                <span className="uk-margin-bottom" uk-icon="icon: plus; ratio: 3"></span>
-                <br></br>
-                Nuevo producto
-            </button> */}
 
             <div id="new-product" uk-modal="true">
                 <div className="uk-modal-dialog">

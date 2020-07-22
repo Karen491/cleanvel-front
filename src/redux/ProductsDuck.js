@@ -19,6 +19,13 @@ const EDIT_PRODUCT_ERROR = "cleanvel/products/EDIT_PRODUCT_ERROR";
 const DELETE_PRODUCT_SUCCESS = "cleanvel/products/DELETE_PRODUCT_SUCCESS";
 const DELETE_PRODUCT_ERROR = "cleanvel/products/DELETE_PRODUCT_ERROR";
 
+const ADD_PURCHASE_SUCCESS = "cleanvel/products/ADD_PURCHASE_SUCCESS";
+const ADD_PURCHASE_ERROR = "cleanvel/products/ADD_PURCHASE_ERROR";
+
+const ADD_TRANSFER_SUCCESS = "cleanvel/products/ADD_TRANSFER_SUCCESS";
+const ADD_TRANSFER_ERROR = "cleanvel/products/ADD_TRANSFER_ERROR";
+
+
 //Setting initial state
 const initialState = {
     products: {},
@@ -56,6 +63,15 @@ export default function reducer(state = initialState, action) {
         case DELETE_PRODUCT_ERROR:
             return { ...state, status: "error", error: action.error }
 
+        case ADD_PURCHASE_SUCCESS:
+            return { ...state, status: "success", products: { ...state.products, [action.payload._id]: action.payload } }
+        case ADD_PURCHASE_ERROR:
+            return { ...state, status: "error", error: action.error }
+
+        case ADD_TRANSFER_SUCCESS:
+            return { ...state, status: "success", products: { ...state.products, [action.payload._id]: action.payload } }
+        case ADD_TRANSFER_ERROR:
+            return { ...state, status: "error", error: action.error }
 
         default:
             return state;
@@ -117,6 +133,26 @@ export const deleteProductError = (error) => ({
     error,
 });
 
+export const addPurchaseSuccess = (payload) => ({
+    type: ADD_PURCHASE_SUCCESS,
+    payload,
+});
+
+export const addPurchaseError = (error) => ({
+    type: ADD_PURCHASE_ERROR,
+    error,
+});
+
+export const addTransferSuccess = (payload) => ({
+    type: ADD_TRANSFER_SUCCESS,
+    payload,
+});
+
+export const addTransferError = (error) => ({
+    type: ADD_TRANSFER_ERROR,
+    error,
+});
+
 
 //Get products thunk
 export const getProducts = () => (dispatch) => {
@@ -124,7 +160,7 @@ export const getProducts = () => (dispatch) => {
     return axios
         .get(`${base_url}/products`)
         .then((res) => {
-            const products = normalizeData(res.data.products);
+            const products = normalizeData(res.data.products)
             dispatch(getProductsSuccess(products));
         })
         .catch((err) => {
@@ -183,3 +219,32 @@ export const deleteProduct = (id) => (dispatch) => {
             dispatch(deleteProductError(err));
         })
 };
+
+//Add purchase thunk
+export const addPurchase = (params) => (dispatch) => {
+    dispatch(loadingProducts());
+    return axios
+        .patch(`${base_url}/products/purchase/${params.id}`, params.data)
+        .then((res) => {
+            dispatch(addPurchaseSuccess(res.data.product));
+        })
+        .catch((err) => {
+            dispatch(addPurchaseError(err));
+        });
+};
+
+//Add transfer thunk
+export const addTransfer = (params) => (dispatch) => {
+    dispatch(loadingProducts());
+    return axios
+        .patch(`${base_url}/products/transfer/${params.id}`, params.data)
+        .then((res) => {
+            dispatch(addTransferSuccess(res.data.product));
+        })
+        .catch((err) => {
+            dispatch(addTransferError(err));
+        });
+};
+
+
+
