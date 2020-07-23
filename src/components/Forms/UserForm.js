@@ -5,10 +5,6 @@ const Error = styled.div`
 color:red;
 font-size: 15px;
 `
-const Role = styled.span`
-color:blue;
-font-size: 15px;
-`
 
 const UserForm = ({ data, errors, register, reset }) => {
     
@@ -75,7 +71,7 @@ const UserForm = ({ data, errors, register, reset }) => {
                 : null}
 
             <div className="uk-width-1-2@s">
-                <label className="uk-form-label">Permisos: {data ? <Role>{data.role}</Role> : null}</label>
+                <label className="uk-form-label">Permisos:</label>
                 <select
                     defaultValue={data ? data.role : ""}
                     className="uk-select"

@@ -53,7 +53,9 @@ const Transfer = () => {
             const id = product.id;
             const data = product;
             const params = { id, data };
-            dispatch(addTransfer(params));
+            dispatch(addTransfer(params)).then(() => {
+                document.location.reload(true);
+            })
             return params;
         })
     }

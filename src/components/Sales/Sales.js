@@ -72,7 +72,7 @@ const Sales = () => {
                                 </thead>
 
                                 <tbody>
-                                    {products.map((product, index) => (
+                                    {list.map((product, index) => (
                                         <tr key={index}>
                                             <td className="table-cell">{product.name}</td>
                                             <td className="table-cell uk-text-center">{store === "libertad" ? product.quantity.libertad : product.quantity.ciudad_judicial}</td>
@@ -90,7 +90,7 @@ const Sales = () => {
 
 
                 <div className="uk-width-2-5">
-                    <TotalSale data={selectedProducts} />
+                    <TotalSale data={selectedProducts} store={store} />
                 </div>
 
             </div>

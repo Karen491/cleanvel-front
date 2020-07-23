@@ -5,10 +5,6 @@ const Error = styled.div`
 color:red;
 font-size: 15px;
 `
-const Select = styled.span`
-color:blue;
-font-size: 15px;
-`
 
 const ProductForm = ({ register, errors, data, reset }) => {
 
@@ -35,7 +31,7 @@ const ProductForm = ({ register, errors, data, reset }) => {
             </div>
 
             <div className="uk-width-1-2@s">
-                <label className="uk-form-label">Categoría: {data ? <Select>{data.category}</Select> : null}</label>
+                <label className="uk-form-label">Categoría:</label>
                 <select
                     defaultValue={data ? data.category : ""}
                     className="uk-select"
