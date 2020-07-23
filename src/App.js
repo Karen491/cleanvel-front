@@ -20,7 +20,7 @@ function App() {
     <div className="uk-width-expand uk-margin-remove" uk-grid="true">
       {!user && <AuthForm />}
       {user && <Navbar user={user} />}
-      <Routes />
+      {user && <Routes />}
     </div>
   );
 }
