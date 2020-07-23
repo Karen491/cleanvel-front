@@ -41,7 +41,7 @@ const Transfer = () => {
 
     const submitTransfer = (data) => {
         const { destination } = transfer;
-        const list = denormalizeData(data).filter(item => {
+        const list = denormalizeData(data).filter((item) => {
             if (destination === "libertad") {
                 return item.transfer.libertad > 0
             } else if (destination === "ciudad_judicial") {
@@ -63,7 +63,7 @@ const Transfer = () => {
     return (
         <div className="uk-margin-left uk-width-expand">
             <div className="uk-flex uk-flex-between uk-margin-large-left uk-padding-remove-bottom">
-                <RouteTitle title="Inventario CleanVel: Registrar traspaso" img="https://res.cloudinary.com/karen491/image/upload/c_scale,h_351,w_424/v1595050577/cleanvel/App%20pictures/inventory_tivarg.png"/>
+                <RouteTitle title="Inventario CleanVel: Registrar traspaso" img="https://res.cloudinary.com/karen491/image/upload/c_scale,h_351,w_424/v1595050577/cleanvel/App%20pictures/inventory_tivarg.png" />
 
                 <div className="uk-margin-medium-top uk-margin-right">
                     <Link to="/inventario" className="nav-user-icon">
@@ -109,7 +109,9 @@ const Transfer = () => {
                                 {list.map((product, index) => (
                                     <tr key={index}>
                                         <td className="table-cell">{product.name}</td>
-                                        <td className="table-cell uk-text-center">{product.quantity.warehouse}</td>
+                                        <td className="table-cell uk-text-center">
+                                            {transfer.origin === "warehouse" ? product.quantity.warehouse : product.quantity.ciudad_judicial}
+                                        </td>
                                         <td className="table-cell uk-text-center">{product.minumum}</td>
                                         <td className="uk-flex">
                                             <div>
@@ -140,7 +142,9 @@ const Transfer = () => {
                                                 />
                                             </div>
                                         </td>
-                                        <td className="table-cell uk-text-center">{product.quantity.libertad}</td>
+                                        <td className="table-cell uk-text-center">
+                                            {transfer.destination === "ciudad_judicial" ? product.quantity.ciudad_judicial : product.quantity.libertad}
+                                        </td>
                                         <td className="table-cell uk-text-center">{product.minumum}</td>
                                     </tr>
                                 ))
