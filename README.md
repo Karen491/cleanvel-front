@@ -30,7 +30,7 @@ __Inventory__
 The following tools are included in this route:
 - table with shortage products
 - detail per product
-- registering a purchase (adding to stock)
+- registering a purchase (adding to stock). If the purchase price changes, the app will calculate the average from the old and new price and set that new value as the new purchase price.
 - product transfer
 
 For each product movement, our app will recalculate inventory values (for stores and categories) if needed. 
