@@ -1,68 +1,89 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Image](https://res.cloudinary.com/karen491/image/upload/c_scale,h_80,w_300/v1594786117/cleanvel/App%20pictures/cleanvel-logo_vep7s6.png)
 
-## Available Scripts
+Cleanvel App   
+=========	
 
-In the project directory, you can run:
+Frontend Repository: React
+---------
 
-### `yarn start`
+About the app
+---------
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Cleanvel is a company based in Puebla, Mexico dedicated to selling cleaning products and supplies. There are currently two branches in Puebla and they manage an avarege of 500 products. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Cleanvel App is an inventory manager, it's goal is to provide the necessary tools to keep track of products' ins and outs and to keep track of inventory value to keep inventory KPI's (key performance indicator) as healthy as possible.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+App Features
+---------
 
-### `yarn build`
+__Graphs__
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+There are three graphs incuded in the app:
+- Bar graph: this graph shows the 10 products with the highest inventory values
+- Pie graph: this graph shows the 4 categories with the highest inventory value
+- Doughnut chart: represents inventory value per store 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+__Inventory__
 
-### `yarn eject`
+The following tools are included in this route:
+- table with shortage products
+- detail per product
+- registering a purchase (adding to stock)
+- product transfer
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+For each product movement, our app will recalculate inventory values (for stores and categories) if needed. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+__Products__
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+In this section we can view all current products and also filter them per category. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Tool included: (only for Admin users)
+- adding a new product
+- deleting a product
+- editing a product 
 
-## Learn More
+__Sales__
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+We can register a sale from an specified store to be able to subtract the number of items sold and recalculate inventory values. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Features:
+- accesing inventory per store
+- saving a purchase
 
-### Code Splitting
+At this stage, we can't see a sales report since the app is focused on inventory only. Future stages will focus on sales. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+__Stores__
 
-### Analyzing the Bundle Size
+Stores' section gives us general information about current stores. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+The only tool available here is the option to _edit_ the information. Stores can't be added or deleted since they are directly connected with product's availability and values. Changes in stores will require a major update in our code.
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+__Users__
 
-### Advanced Configuration
+This section is only available for Admin users. In this section we can:
+- update user's role
+- register a new user
+- edit user's information
+- delete a user
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+__Libraries used__
 
-### Deployment
+- Chart.js
+- React Hook Form
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Deployment
+---------
 
-### `yarn build` fails to minify
+Current deployment via Heroku: [Cleanvel Puebla](https://cleanvel.herokuapp.com/)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Author
+---------
+
+Ana Karen Pérez Flores
+
+[GitHub Profile](https://github.com/Karen491)
+
+![Image](https://res.cloudinary.com/karen491/image/upload/v1595542790/ironhack_pm4ef8.png)
