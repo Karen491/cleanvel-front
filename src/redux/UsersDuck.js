@@ -87,7 +87,6 @@ export const createUserError = (error) => ({
     error,
 });
 
-
 export const editUserSuccess = (payload) => ({
     type: EDIT_USER_SUCCESS,
     payload,

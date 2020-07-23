@@ -62,7 +62,7 @@ export const login = (credentials) => (dispatch) => {
             localStorage.setItem("user", JSON.stringify(user));
             dispatch(loginSuccess(user));
         })
-        .catch((res) => dispatch(loginError(res.response.data)));
+        .catch((res) => dispatch(loginError(res.response.data.msg)));
 };
 
 //logout thunk

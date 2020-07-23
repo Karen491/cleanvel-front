@@ -1,14 +1,20 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import ProductCard from "../Common/ProductCard";
 import RouteTitle from "../Common/RouteTitle";
 import NewProduct from "./NewProduct";
 
 const Products = () => {
+    const user = useSelector(state => state.user.data);
+    const isAdmin = user.role === "Administrador";
+
     return (
         <div className="uk-margin-left uk-width-expand">
             <div className="uk-flex uk-flex-between uk-margin-large-left uk-padding-remove-bottom">
-                <RouteTitle title="Productos Cleanvel" img="https://res.cloudinary.com/karen491/image/upload/c_scale,h_351,w_424/v1594630398/cleanvel/App%20pictures/products-icon_bwgtqa.png"/>
-                <NewProduct />
+                <RouteTitle title="Productos Cleanvel" img="https://res.cloudinary.com/karen491/image/upload/c_scale,h_351,w_424/v1594630398/cleanvel/App%20pictures/products-icon_bwgtqa.png" />
+                {isAdmin &&
+                    <NewProduct />
+                }
             </div>
             <hr className="uk-margin-remove-top divider"></hr>
 

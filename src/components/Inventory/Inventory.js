@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { denormalizeData, currencyFormat } from "../../utils/formatters";
 import RouteTitle from "../Common/RouteTitle";
+import StoreGraph from "../Graphs/StoreGraph";
+import ShortageProducts from "./ShortageProducts";
 import styled from 'styled-components'
 
 const Card = styled.div`
@@ -19,7 +21,7 @@ const Inventory = () => {
     return (
         <div className="uk-margin-left uk-width-expand">
             <div className="uk-flex uk-flex-between uk-margin-large-left uk-padding-remove-bottom">
-                <RouteTitle title="Inventario Cleanvel" img="https://res.cloudinary.com/karen491/image/upload/c_scale,h_351,w_424/v1595050577/cleanvel/App%20pictures/inventory_tivarg.png"/>
+                <RouteTitle title="Inventario Cleanvel" img="https://res.cloudinary.com/karen491/image/upload/c_scale,h_351,w_424/v1595050577/cleanvel/App%20pictures/inventory_tivarg.png" />
 
                 <div className="uk-inline uk-margin-top uk-margin-large-right">
                     <button className="app-button" type="button">
@@ -29,8 +31,9 @@ const Inventory = () => {
 
                     <div className="profile-card" uk-dropdown="pos: bottom-left">
                         <ul className="uk-nav uk-dropdown-nav">
+                            <li><Link to="/inventario/detalle"><span className="nav-text">Inventario</span></Link></li>
                             <li><Link to="/inventario/compra"><span className="nav-text">Agregar a stock</span></Link></li>
-                            <li className="uk-margin-top"><Link to="/inventario/traspaso"><span className="nav-text">Traspaso</span></Link></li>
+                            <li><Link to="/inventario/traspaso"><span className="nav-text">Traspaso</span></Link></li>
                         </ul>
                     </div>
                 </div>
@@ -84,6 +87,17 @@ const Inventory = () => {
                     </Card>
                 </div>
             </div>
+
+            <div className="uk-child-width-expand@s uk-height-large uk-margin-medium-right uk-margin-large-top" uk-grid="true">
+                <div>
+                    <StoreGraph />
+                </div>
+
+                <div>
+                    <ShortageProducts />
+                </div>
+            </div>
+
         </div>
     )
 }

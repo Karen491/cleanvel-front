@@ -8,6 +8,7 @@ import "./stylesHome.css"
 const Navbar = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.data);
+    const isAdmin = user.role === "Administrador";
 
     const handleLogout = () => {
         dispatch(logout());
@@ -36,13 +37,6 @@ const Navbar = () => {
                     </li>
 
                     <li>
-                        <Link to="/tiendas">
-                            <span className="uk-margin-small-right nav-text" uk-icon="icon: location; ratio: 1.1"></span>
-                            <span className="nav-text">Tiendas</span>
-                        </Link>
-                    </li>
-
-                    <li>
                         <Link to="/productos">
                             <span className="uk-margin-small-right nav-text" uk-icon="icon: database; ratio: 1.1"></span>
                             <span className="nav-text">Productos</span>
@@ -57,11 +51,20 @@ const Navbar = () => {
                     </li>
 
                     <li>
-                        <Link className="uk-text-capitalize" to="/usuarios">
-                            <span className="uk-margin-small-right nav-text" uk-icon="icon: users; ratio: 1.1"></span>
-                            <span className="nav-text">Usuarios</span>
+                        <Link to="/tiendas">
+                            <span className="uk-margin-small-right nav-text" uk-icon="icon: location; ratio: 1.1"></span>
+                            <span className="nav-text">Tiendas</span>
                         </Link>
                     </li>
+
+                    {isAdmin &&
+                        <li>
+                            <Link className="uk-text-capitalize" to="/usuarios">
+                                <span className="uk-margin-small-right nav-text" uk-icon="icon: users; ratio: 1.1"></span>
+                                <span className="nav-text">Usuarios</span>
+                            </Link>
+                        </li>
+                    }
 
                     <hr></hr>
                     <div className="uk-inline">

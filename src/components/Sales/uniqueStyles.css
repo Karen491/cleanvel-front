@@ -1,0 +1,40 @@
+.sales-title {
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+color: #FEFFFF;
+font-weight: 600;
+}
+
+.sales-head {
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+color: #17252A;
+background-color: #FEFFFF;
+font-size: 15px;
+position: sticky;
+top: 0; 
+}
+
+.sales-cell {
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+color: #FEFFFF;
+font-size: 12px;
+}
+
+.sales-card {
+background-color: #25424dd0;
+border-radius: 10%
+}
+
+.sales-total {
+background-color: #FEFFFF;
+border-radius: 5%;
+padding: 0 30px;
+color: #17252A;
+}
+
+.sales-button {
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+background-color: #FEFFFF;
+border: 1px solid #FEFFFF;
+border-radius: 10%;
+padding: 10px;
+}

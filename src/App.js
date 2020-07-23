@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../src/redux/ProductsDuck";
+import { getEvents } from "../src/redux/EventsDuck";
 import AuthForm from "./components/Home/AuthForm";
-import Navbar from "./components/Home/Navbar";
+import Navbar from "./components/Home/navbar";
 import Routes from "./Routes";
 import './App.css';
 
@@ -12,6 +13,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getProducts());
+    dispatch(getEvents());
   }, [dispatch]);
 
   return (
