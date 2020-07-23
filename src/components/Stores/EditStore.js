@@ -26,16 +26,16 @@ const EditStore = ({ id }) => {
         const id = editableStore._id;
         const params = { id, data }
         dispatch(editStore(params)).then(() => {
-            UIkit.modal("#edit-store").hide();
+            UIkit.modal(`#edit-store-${id}`).hide();
         });
     };
 
 
     return (
         <div>
-            <button className="uk-icon-button uk-margin-small-right" uk-icon="pencil" type="button" uk-toggle="target: #edit-store" onClick={handleClick}></button>
+            <button className="uk-icon-button uk-margin-small-right" uk-icon="pencil" type="button" uk-toggle={`target: #edit-store-${id}`} onClick={handleClick}></button>
 
-            <div id="edit-store" uk-modal="true">
+            <div id={`edit-store-${id}`} uk-modal="true">
                 {editableStore &&
                     <div className="uk-modal-dialog">
                         <button className="uk-modal-close-default" type="button" uk-close="true"></button>
