@@ -10,13 +10,13 @@ font-size: 15px;
 `
 
 const Card = styled.div`
-background-color: #17252A;
+background-color: #1f3e49e3;
 `
 
 const ImgCard = styled.div`
 background-color: #FEFFFF;
-border-radius: 50%;
-padding: 10px;
+border-radius: 5%;
+padding: 5px 10px;
 `
 
 const AuthForm = () => {

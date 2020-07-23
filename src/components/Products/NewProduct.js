@@ -11,8 +11,10 @@ const NewProduct = () => {
 
     const onSubmit = (data) => {
         data = { ...data, profit: data.sale_price - data.purchase_price }
-        dispatch(createProduct(data)).then(() => {
+        dispatch(createProduct(data))
+        .then(() => {
             UIkit.modal("#new-product").hide();
+            document.location.reload(true);
         });
     };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { denormalizeData, sortData } from "../../utils/formatters";
@@ -19,13 +19,23 @@ color: #17252A;
 
 const ProductsTable = () => {
     const filter = useLocation().pathname.substring(11);
+    let [searchValue, setSearchValue] = useState();
     const products = useSelector(state => state.products.products);
+    const user = useSelector(state => state.user.data);
+    const isAdmin = user.role === "Administrador";
     let data = [];
 
     if (filter === "todos") {
         data = sortData(denormalizeData(products));
     } else {
         data = sortData(denormalizeData(products).filter(product => product.category.toLowerCase() === filter));
+    }
+
+    data = !searchValue ? data : data.filter(product => product.name.toLowerCase().includes(searchValue.toLocaleLowerCase()));
+
+    const handleChange = (e) => {
+        let { value } = e.target;
+        setSearchValue(value);
     }
 
     return (
@@ -45,7 +55,12 @@ const ProductsTable = () => {
             </div>
             <hr className="uk-margin-remove-top divider"></hr>
 
-            <div className="uk-text-right uk-margin-large-right uk-margin-top">
+            <div className="uk-text-right uk-margin-large-right uk-margin-top uk-flex uk-flex-around uk-flex-middle">
+                <div className="uk-inline uk-margin-top uk-margin-large-left uk-width-1-2">
+                    <span className="uk-form-icon" uk-icon="icon: search"></span>
+                    <input className="uk-input" type="text" placeholder="Buscar producto..." onChange={handleChange} />
+                </div>
+
                 <Link to="/productos" className="nav-user-icon">
                     <span className="nav-user-icon" uk-icon="icon: chevron-left"></span>
                     Regresar
@@ -63,7 +78,9 @@ const ProductsTable = () => {
                             <td className="table-head uk-text-center">Precio de compra</td>
                             <td className="table-head uk-text-center">Precio de venta</td>
                             <td className="table-head uk-text-center">Margen de ganancia</td>
-                            <td className="table-head uk-text-center">Acciones</td>
+                            {isAdmin &&
+                                <td className="table-head uk-text-center">Acciones</td>
+                            }
                         </tr>
                     </thead>
                     <tbody>
@@ -78,12 +95,14 @@ const ProductsTable = () => {
                                 <td className="table-cell uk-text-center">{product.purchase_price}</td>
                                 <td className="table-cell uk-text-center">{product.sale_price}</td>
                                 <td className="table-cell uk-text-center">{product.profit}</td>
-                                <td>
-                                    <div className="uk-flex">
-                                        <EditProduct id={product._id} />
-                                        <DeleteProduct id={product._id} />
-                                    </div>
-                                </td>
+                                {isAdmin &&
+                                    <td>
+                                        <div className="uk-flex">
+                                            <EditProduct id={product._id} />
+                                            <DeleteProduct id={product._id} />
+                                        </div>
+                                    </td>
+                                }
                             </tr>
                         ))}
                     </tbody>
